@@ -1,0 +1,9 @@
+image:
+  viewer: { repository: viewer, tag: latest }
+  api: { repository: api-gateway, tag: latest }
+  crs: { repository: crs-transform, tag: latest }
+service:
+  type: ClusterIP
+  viewerPort: 80
+  apiPort: 8080
+  crsPort: 9000

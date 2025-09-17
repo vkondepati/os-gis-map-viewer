@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: gis-api }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: gis-api } }
+  template:
+    metadata: { labels: { app: gis-api } }
+    spec:
+      containers:
+        - name: api
+          image: {{ .Values.image.api.repository }}:{{ .Values.image.api.tag }}
+          env:
+            - name: CRS_BASE_URL
+              value: "http://gis-crs:9000"
+          ports: [{ containerPort: 8080 }]
+          readinessProbe:
+            httpGet: { path: /health, port: 8080 }

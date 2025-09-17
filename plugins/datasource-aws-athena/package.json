@@ -1,0 +1,5 @@
+{
+  "name": "datasource-aws-athena",
+  "private": true,
+  "type": "module"
+}

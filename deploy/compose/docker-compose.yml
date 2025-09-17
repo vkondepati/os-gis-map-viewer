@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  viewer:
+    build: ../../apps/viewer
+    ports: ["5173:5173"]
+    environment:
+      - API_BASE_URL=http://localhost:8080
+    volumes:
+      - ../../samples:/app/public/samples
+  api:
+    build: ../../apps/api-gateway
+    ports: ["8080:8080"]
+    environment:
+      - CRS_BASE_URL=http://crs:9000
+    depends_on: [crs]
+  crs:
+    build: ../../services/crs-transform
+    ports: ["9000:9000"]

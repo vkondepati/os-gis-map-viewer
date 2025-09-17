@@ -1,0 +1,21 @@
+{
+  "name": "gis-map-viewer-repo",
+  "private": true,
+  "packageManager": "pnpm@9.6.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r --parallel dev",
+    "lint": "pnpm -r lint || true",
+    "test": "pnpm -r test || true",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "plugins/*",
+    "services/*"
+  ]
+}

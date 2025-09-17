@@ -1,0 +1,7 @@
+[project]
+name = "crs-transform"
+version = "0.1.0"
+description = "CRS transformation microservice (FastAPI + pyproj)"
+authors = [{name="GIS Map Viewer Contributors"}]
+requires-python = ">=3.11"
+dependencies = ["fastapi","uvicorn[standard]","pyproj","pydantic>=2"]

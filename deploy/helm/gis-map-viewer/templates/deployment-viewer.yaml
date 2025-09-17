@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: gis-viewer }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: gis-viewer } }
+  template:
+    metadata: { labels: { app: gis-viewer } }
+    spec:
+      containers:
+        - name: viewer
+          image: {{ .Values.image.viewer.repository }}:{{ .Values.image.viewer.tag }}
+          ports: [{ containerPort: 5173 }]

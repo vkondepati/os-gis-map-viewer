@@ -1,0 +1,5 @@
+{
+  "name": "datasource-iceberg",
+  "private": true,
+  "type": "module"
+}

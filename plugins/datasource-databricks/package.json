@@ -1,0 +1,5 @@
+{
+  "name": "datasource-databricks",
+  "private": true,
+  "type": "module"
+}

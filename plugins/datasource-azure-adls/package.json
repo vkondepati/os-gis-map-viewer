@@ -1,0 +1,5 @@
+{
+  "name": "datasource-azure-adls",
+  "private": true,
+  "type": "module"
+}

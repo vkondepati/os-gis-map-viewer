@@ -1,0 +1,17 @@
+import Fastify from 'fastify'
+import cors from '@fastify/cors'
+import { health } from './routes/health'
+import { crs } from './routes/crs'
+import { datasources } from './routes/datasources'
+import { styles } from './routes/styles'
+import { edits } from './routes/edits'
+
+const app = Fastify({ logger: true })
+await app.register(cors, { origin: true })
+app.register(health, { prefix: '/health' })
+app.register(crs, { prefix: '/crs' })
+app.register(datasources, { prefix: '/datasources' })
+app.register(styles, { prefix: '/styles' })
+app.register(edits, { prefix: '/edits' })
+const port = Number(process.env.PORT || 8080)
+app.listen({ port, host: '0.0.0.0' }).then(() => app.log.info(`api-gateway on ${port}`))

@@ -1,0 +1,5 @@
+{
+  "name": "datasource-snowflake",
+  "private": true,
+  "type": "module"
+}
