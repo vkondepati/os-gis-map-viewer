@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  graph-builder:
+    build: ../../services/sedona-graph
+    image: sedona-graph:local
+    volumes:
+      - ./data:/data
+    environment:
+      - PYSPARK_PYTHON=python3
+    command:
+      [
+        "python",
+        "/app/build_graph.py",
+        "--input",
+        "/data/roads.geojson",
+        "--out",
+        "/data/graph",
+      ]
+
+  sedona-router:
+    build: ../../services/sedona-router
+    image: sedona-router:local
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./data/graph:/data/graph
+    environment:
+      - GRAPH_PATH=/data/graph
+
+volumes:
+  data: {}

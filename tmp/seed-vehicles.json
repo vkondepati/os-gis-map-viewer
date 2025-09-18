@@ -1,0 +1,15 @@
+{
+  "layer": "vehicles",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "id": "veh-1", "speed": 12.5, "heading": 90 },
+      "geometry": { "type": "Point", "coordinates": [-122.4235, 37.779] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "veh-2", "speed": 8.2, "heading": 270 },
+      "geometry": { "type": "Point", "coordinates": [-122.4225, 37.7782] }
+    }
+  ]
+}

@@ -7,9 +7,13 @@ export default function DatasourcePanel({ onSelect }:{ onSelect:(ds:{id:string,l
   const [selectedDs, setSelectedDs] = useState<string | undefined>()
   const [layers, setLayers] = useState<string[]>([])
   const [selectedLayer, setSelectedLayer] = useState<string | undefined>()
+  const [error, setError] = useState<string|undefined>()
 
   useEffect(()=>{
-    fetch(`${API_BASE_URL}/datasources`).then(r=>r.json()).then(j=>setDatasources(j.available||j))
+    fetch(`${API_BASE_URL}/datasources`).then(r=>{
+      if(!r.ok) throw new Error('datasources fetch failed '+r.status)
+      return r.json()
+    }).then(j=>setDatasources(j.available||j)).catch(err=>{ console.error(err); setError(String(err)); setDatasources(['sedona']) })
   }, [])
 
   useEffect(()=>{
@@ -20,7 +24,8 @@ export default function DatasourcePanel({ onSelect }:{ onSelect:(ds:{id:string,l
   useEffect(()=>{ if(selectedDs && selectedLayer) onSelect({ id:selectedDs, layer: selectedLayer }) }, [selectedDs, selectedLayer])
 
   return (
-    <div style={{position:'absolute', top:60, left:12, background:'white', padding:8, borderRadius:8}}>
+    <div style={{position:'absolute', top:60, left:12, background:'white', padding:8, borderRadius:8, zIndex:999}}>
+      {error && <div style={{color:'crimson', marginBottom:6}}>Datasource fetch error: {error}</div>}
       <div>
         <label>Datasource</label>
         <select value={selectedDs} onChange={e=>setSelectedDs((e.target as any).value)}>

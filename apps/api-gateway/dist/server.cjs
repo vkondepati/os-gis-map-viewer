@@ -24,6 +24,14 @@ function proxyToSedona(path, method='GET', body){
 
 const server = http.createServer(async (req, res) => {
   try{
+    // Simple CORS handling for the demo viewer
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+    if(req.method === 'OPTIONS'){
+      res.writeHead(204)
+      return res.end()
+    }
     const parsed = url.parse(req.url, true)
     if(req.method === 'GET' && parsed.pathname === '/datasources'){
       return res.end(JSON.stringify({ available: ['sedona'] }))
@@ -50,16 +58,27 @@ const server = http.createServer(async (req, res) => {
         const data = await proxyToSedona('/write','POST', j)
         return res.end(JSON.stringify(data))
       }
+      if(action === 'route' && req.method === 'POST'){
+        let body=''
+        for await (const chunk of req) body += chunk
+        const j = JSON.parse(body||'{}')
+        const data = await proxyToSedona('/route', 'POST', j)
+        return res.end(JSON.stringify(data))
+      }
     }
 
     if(req.method === 'POST' && parsed.pathname === '/edits/save'){
       let body=''
       for await (const chunk of req) body += chunk
-      const j = JSON.parse(body||'{}')
+  console.log('/edits/save received, bytes=', body.length)
+  try{ console.log('body preview:', JSON.stringify(body.slice(0,200))) }catch(_){ }
+  let j = {}
+  try{ j = JSON.parse(body||'{}') }catch(e){ console.error('invalid json on edits/save', e); console.error('raw body chars:', Array.from((body||'').slice(0,80)).map(c=>c.charCodeAt? c.charCodeAt(0): c)); return res.writeHead(400) && res.end(JSON.stringify({ error: 'invalid json' })) }
       // write to samples/edits.geojson
       const file = 'samples/data/edits.geojson'
       await fs.mkdir('samples/data', { recursive: true })
       await fs.writeFile(file, JSON.stringify(j, null, 2), 'utf-8')
+      console.log('wrote edits to', file)
       return res.end(JSON.stringify({ ok:true, features: Array.isArray(j.features)? j.features.length : 0 }))
     }
 

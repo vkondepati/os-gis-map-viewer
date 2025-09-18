@@ -1,0 +1,157 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "id": "1RyPz0QLdhz7m3NE54JA6fEMGxxrKSpV",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          -105.18989433293443,
+          37.925847442081405
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "id": "hDUoYAXl0S9o359oIYAeFOYxyXjCQqkt",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          -101.0344040397934,
+          37.43603437501086
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "id": "gnhJbFMZwZIBEeEJAO8UP8X8RmjoXskm",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          -95.81793750159504,
+          37.995556475231396
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "id": "tTozlwVgridUWw1xYoAMmthlcFRyt5mf",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          -92.72342345351132,
+          34.210910096574636
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "id": "pNrSOkprRvZUSSvvQuOeDX6UrWC6ViJm",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          -100.23867185600074,
+          32.58711133678216
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "id": "IOKP8nyBof7yoL9a3Kahun1BnSzFLjkK",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          -104.65940621040576,
+          32.88459875440495
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "id": "acAtRL6poD72bQh6Sb0V39bbzbh7GY4l",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            -109.96428743569236,
+            40.86312661193094
+          ],
+          [
+            -108.54965244228215,
+            39.71667349101267
+          ],
+          [
+            -107.22343213596083,
+            38.75797881422426
+          ]
+        ],
+        "type": "LineString"
+      }
+    },
+    {
+      "id": "GrY7Sge2EKJMDIsNDehWvDyIOUumRK7j",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            -104.48257683622933,
+            39.17045188740113
+          ],
+          [
+            -95.19903469197882,
+            39.375786946204016
+          ]
+        ],
+        "type": "LineString"
+      }
+    },
+    {
+      "id": "gIL33F8aNdaOmNtf6j2K6Eg2fYTGgnn9",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -91.57403252136646,
+              40.59512364380339
+            ],
+            [
+              -87.86061566366584,
+              41.130049467709654
+            ],
+            [
+              -85.73866317355123,
+              39.17045188740113
+            ],
+            [
+              -85.38500442519901,
+              36.94299457282757
+            ],
+            [
+              -88.47951847328274,
+              36.304369983740784
+            ],
+            [
+              -91.04354439883778,
+              38.343108019229305
+            ],
+            [
+              -91.57403252136646,
+              40.59512364380339
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      }
+    }
+  ]
+}

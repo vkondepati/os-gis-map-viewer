@@ -1,0 +1,28 @@
+{
+  "layer": "streets",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Main St", "speed_limit": 50 },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-122.423246, 37.779388],
+          [-122.423246, 37.778],
+          [-122.422, 37.777]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "2nd Ave", "speed_limit": 40 },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-122.421, 37.779],
+          [-122.419, 37.778]
+        ]
+      }
+    }
+  ]
+}

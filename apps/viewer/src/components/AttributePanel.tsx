@@ -8,7 +8,7 @@ export default function AttributePanel({ feature, onChange }:{ feature:any; onCh
   const addKey = () => setProps(s=>({ ...s, newKey: '' }))
   const save = ()=> onChange({ ...feature, properties: props })
   return (
-    <div style={{position:'absolute', right:12, bottom:12, width:320, background:'white', padding:12, borderRadius:8}}>
+  <div style={{position:'absolute', right:12, bottom:12, width:320, background:'white', padding:12, borderRadius:8, zIndex:999}}>
       <h4>Attributes</h4>
       {Object.keys(props).map(k=> (
         <div key={k} style={{display:'flex', gap:8, marginBottom:6}}>
