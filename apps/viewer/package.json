@@ -9,18 +9,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mapbox/mapbox-gl-draw": "^1.4.3",
+    "gis-map-viewer-repo": "file:../..",
     "maplibre-gl": "^4.7.1",
     "proj4": "^2.11.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "@mapbox/mapbox-gl-draw": "^1.4.3"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/maplibre-gl": "^2.4.0",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "typescript": "^5.6.3",
-    "vite": "^5.4.7",
-    "@vitejs/plugin-react": "^4.3.1"
+    "vite": "^5.4.7"
   }
 }

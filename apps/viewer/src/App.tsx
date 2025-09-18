@@ -5,6 +5,9 @@ import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 import { registerCRS } from './map/crs'
 import EditToolbar from './components/EditToolbar'
+import CRSSelector from './components/CRSSelector'
+import DatasourcePanel from './components/DatasourcePanel'
+import AttributePanel from './components/AttributePanel'
 
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080') as string
 
@@ -65,9 +68,44 @@ export default function App() {
     }
   }
 
+  // datasource handling
+  const [currentDatasource, setCurrentDatasource] = useState<{id:string, layer?:string}|null>(null)
+  const [selectedFeature, setSelectedFeature] = useState<any>(null)
+
+  useEffect(()=>{
+    if(!currentDatasource || !mapRef.current) return
+    const { id, layer } = currentDatasource
+    fetch(`${API_BASE_URL}/datasources/${id}/read`, { method: 'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ layer }) })
+      .then(r=>r.json()).then(j=>{
+        const src = mapRef.current!.getSource('dynamic') as any
+        if(!src) mapRef.current!.addSource('dynamic', { type:'geojson', data: j })
+        else src.setData(j)
+        if(!mapRef.current!.getLayer('dynamic-layer')){
+          mapRef.current!.addLayer({ id:'dynamic-layer', type:'circle', source:'dynamic', paint:{'circle-radius':6,'circle-color':'#e11d48'} })
+          mapRef.current!.on('click', 'dynamic-layer', (ev:any)=>{
+            setSelectedFeature(ev.features && ev.features[0])
+          })
+        }
+      })
+  }, [currentDatasource])
+
+  const onDatasourceSelect = (d:{id:string, layer?:string}) => setCurrentDatasource(d)
+
+  const onFeatureSave = async (feat:any) => {
+    if(!currentDatasource) return alert('No datasource selected')
+    try{
+      const res = await fetch(`${API_BASE_URL}/datasources/${currentDatasource.id}/write`, { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ layer: currentDatasource.layer, features: [feat] }) })
+      const out = await res.json()
+      alert(`Saved ${out.committed} features`) 
+    }catch(e){ console.error(e); alert('Write failed') }
+  }
+
   return (
     <div style={{height:'100vh', width:'100vw', position:'relative'}}>
       <EditToolbar onMode={setMode} onSave={save} />
+      <DatasourcePanel onSelect={onDatasourceSelect} />
+      <CRSSelector value={'EPSG:4326'} onChange={()=>{}} />
+      <AttributePanel feature={selectedFeature} onChange={onFeatureSave} />
       <div id="map" style={{height:'100%', width:'100%'}} />
     </div>
   )
